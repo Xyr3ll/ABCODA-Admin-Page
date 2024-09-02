@@ -1,0 +1,271 @@
+/* Inventory Container */
+.main-container {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+}
+
+/* Inventory Header */
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.inventory-header p {
+  font-size: 20px;
+}
+
+.inventory-header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.add-product-btn {
+  background-color: #009879;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.add-product-btn .material-icons-outlined {
+  margin-right: 8px;
+}
+
+/* Category Design*/
+.select-container {
+  display: flex;
+  justify-content: left;
+  position: relative;
+  min-width: 250px;
+  height: 40px;
+}
+
+.select-box {
+  border: none;
+  appearance: none;
+  width: 100%;
+  color: white;
+  background-color: #009879;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: left;
+  outline: none;
+}
+
+#categorySelect {
+  padding: 10px;
+  width: 10%;
+}
+
+/* Inventory List */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 20px;
+  margin: 5px;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+}
+
+.table thead th {
+  color: black;
+}
+
+.table tbody td {
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.548);
+  text-align: center;
+}
+
+.table tbody tr {
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.table tbody tr:last-of-type {
+  border-bottom: 2px solid #dddddd;
+}
+
+/* Style for action buttons */
+.edit-btn,
+.delete-btn {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.edit-btn img,
+.delete-btn img {
+  width: 20px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  opacity: 0.8;
+}
+
+/* modal */
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  top: 50%;
+  left: 50%;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s, visibility 0.4s;
+  transform: translate(-50%, -50%) scale(0.1);
+}
+
+.modal-content {
+  color: black;
+  background-color: #fefefe;
+  margin: 12% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+form label {
+  display: block;
+  margin: 15px 0 5px;
+}
+
+form input[type="text"],
+form input[type="number"] {
+  width: 475px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}
+
+form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#flowers,
+#editFlowers {
+  padding: 10px;
+  outline: none;
+  border-radius: 3px;
+  border-style: solid;
+}
+
+/* Pop up Successfully */
+.popup {
+  width: 400px;
+  background: #fefefe;
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: black;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s, visibility 0.4s;
+}
+
+.open-popup {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup img {
+  width: 100px;
+  margin-top: -50px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h2 {
+  font-size: 38px;
+  font-weight: 500px;
+  margin: 30px 0 10px;
+}
+
+.popup button {
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: #6fd649;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete Pop Up */
+.popup-content {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.popup-buttons {
+  margin-top: 20px;
+  display: flex; /* Align buttons in a row */
+  justify-content: center; /* Center buttons horizontally */
+}
+
+.popup-button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.popup-button.confirm {
+  background-color: #d9534f;
+  color: white;
+}
+
+.popup-button.cancel {
+  background-color: #5bc0de;
+  color: white;
+}
