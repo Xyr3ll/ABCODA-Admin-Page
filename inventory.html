@@ -17,6 +17,7 @@
     />
     <link rel="stylesheet" href="css/sidebarheader.css" />
     <link rel="stylesheet" href="css/inventory.css" />
+    <link rel="stylesheet" href="css/logout.css" />
   </head>
   <body>
     <div class="grid-container">
@@ -65,13 +66,13 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#">
+            <a href="user.html">
               <span class="material-icons-outlined">account_circle</span>
               User Accounts
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#">
+            <a href="reports.html">
               <span class="material-icons-outlined">bar_chart</span>
               Reports
             </a>
@@ -251,9 +252,24 @@
         </div>
       </main>
       <!--End Main Content-->
+
+      <!-- Logout Confirmation Modal -->
+      <div id="logout-modal" class="modal-logout">
+        <div class="modal-content-logout">
+          <span class="close" onclick="closeLogoutModal()">&times;</span>
+          <h2>Are you sure you want to log out?</h2>
+          <div class="modal-buttons">
+            <button onclick="confirmLogout()">Yes</button>
+            <button onclick="closeLogoutModal()">No</button>
+          </div>
+        </div>
+      </div>
+      
     </div>
     <script src="js/sidebarheader.js"></script>
+    <script src="js/logout.js"></script>
+
     <script type="module" src="js/inventory.js"></script>
-    <script type="module" src="js/firebase/database.js"></script>   
+    <script type="module" src="js/firebase/database.js"></script>
   </body>
 </html>
