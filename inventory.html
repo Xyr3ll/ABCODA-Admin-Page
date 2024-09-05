@@ -113,6 +113,7 @@
             <table class="table">
               <thead>
                 <tr>
+                  <th>Image</th>
                   <th>Item ID</th>
                   <th>Name</th>
                   <th>Quantity</th>
@@ -133,6 +134,23 @@
               <span class="close-btn">&times;</span>
               <h2>Add New Product</h2>
               <form id="addProductForm">
+                <!-- Image Upload Section -->
+                <label for="productImage" class="product-image-container">
+                  <img
+                    src="images/default.png"
+                    alt="Upload Product Image"
+                    id="productImagePreview"
+                  />
+                  <input
+                    type="file"
+                    id="productImage"
+                    accept="image/*"
+                    style="display: none"
+                    onchange="previewImage(event, 'productImagePreview')"
+                  />
+                </label>
+
+                <!-- Product Information -->
                 <label for="productName">Product Name:</label>
                 <input
                   type="text"
@@ -186,6 +204,22 @@
               <span class="close-btn">&times;</span>
               <h2>Edit Product</h2>
               <form id="editProductForm">
+                <!-- Image Upload Section -->
+                <label for="editProductImage" class="product-image-container">
+                  <img
+                    src="images/default.png"
+                    alt="Upload Product Image"
+                    id="editProductImagePreview"
+                  />
+                  <input
+                    type="file"
+                    id="editProductImage"
+                    accept="image/*"
+                    style="display: none"
+                    onchange="previewImage(event, 'editProductImagePreview')"
+                  />
+                </label>
+
                 <input type="hidden" id="editProductId" />
                 <label for="editProductName">Product Name:</label>
                 <input
@@ -264,8 +298,28 @@
           </div>
         </div>
       </div>
-      
     </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+      <img class="lightbox-image" id="lightboxImage" />
+    </div>
+
+    <script>
+      // Function to see preview image
+      function previewImage(event, previewId) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const preview = document.getElementById(previewId);
+            preview.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    </script>
+
     <script src="js/sidebarheader.js"></script>
     <script src="js/logout.js"></script>
 

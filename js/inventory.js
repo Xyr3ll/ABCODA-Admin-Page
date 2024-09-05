@@ -1,4 +1,4 @@
-import { db } from "./firebase/database.js";
+import { db, storage } from "./firebase/database.js";
 import {
   collection,
   addDoc,
@@ -11,6 +11,12 @@ import {
   query,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
 
 // Category List
 document
@@ -126,13 +132,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const productPrice = document.getElementById("productPrice").value;
     const productStock = document.getElementById("productStock").value;
     const productCategory = document.getElementById("flowers").value;
+    const productImage = document.getElementById("productImage").files[0];
 
     try {
+      let imageUrl = "";
+      if (productImage) {
+        // Upload image and get URL
+        const storageRef = ref(
+          storage,
+          `products/${Date.now()}_${productImage.name}`
+        );
+        await uploadBytes(storageRef, productImage);
+        imageUrl = await getDownloadURL(storageRef);
+      }
+
       const docRef = await addDoc(collection(db, "products"), {
         name: productName,
         price: Number(productPrice),
         stock: Number(productStock),
         category: productCategory,
+        imageUrl: imageUrl,
         createdAt: new Date().toISOString(),
       });
 
@@ -144,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       openPopup("addProductPopup");
       addProductForm.reset();
+      document.getElementById("productImagePreview").src = "images/default.png"; // Reset image preview
     } catch (error) {
       console.error("Error adding product to Firestore: ", error);
       alert("Failed to add product. Please try again.");
@@ -161,14 +181,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const updatedProductStock =
       document.getElementById("editProductStock").value;
     const updatedProductCategory = document.getElementById("editFlowers").value;
+    const productImage = document.getElementById("editProductImage").files[0];
 
     try {
       const docRef = doc(db, "products", productId);
+
+      let imageUrl = "";
+      if (productImage) {
+        // Upload new image and get URL
+        const storageRef = ref(
+          storage,
+          `products/${Date.now()}_${productImage.name}`
+        );
+        await uploadBytes(storageRef, productImage);
+        imageUrl = await getDownloadURL(storageRef);
+      } else {
+        // Retrieve current image URL if no new image is uploaded
+        const docSnap = await getDoc(docRef);
+        imageUrl = docSnap.data().imageUrl;
+      }
+
       await updateDoc(docRef, {
         name: updatedProductName,
         price: Number(updatedProductPrice),
         stock: Number(updatedProductStock),
         category: updatedProductCategory,
+        imageUrl: imageUrl, // Update image URL
         updatedAt: new Date().toISOString(),
       });
 
@@ -213,6 +251,14 @@ window.editProduct = async function (productId) {
       document.getElementById("editProductStock").value = product.stock;
       document.getElementById("editFlowers").value = product.category;
 
+      // Set the image preview
+      const imagePreview = document.getElementById("editProductImagePreview");
+      if (product.imageUrl) {
+        imagePreview.src = product.imageUrl;
+      } else {
+        imagePreview.src = "images/default.png";
+      }
+
       openEditModal("editProductModal");
     } else {
       alert("Product not found.");
@@ -232,20 +278,33 @@ function renderProducts(querySnapshot) {
     const product = doc.data();
     tableRows += `
       <tr data-id="${product.id}">
+        <td>
+          <img
+            src="${product.imageUrl || "images/default.png"}"
+            alt="${product.name}"
+            style="width: 100px; height: auto; border-radius: 10px"
+            class="product-image"
+            data-image-url="${product.imageUrl || "images/default.png"}"
+          />
         <td>${product.id}</td>
         <td>${product.name}</td>
         <td>${product.stock}</td>
         <td>${product.price}</td>
         <td>${product.category}</td>
         <td>
-          <button class="edit-btn" onclick="editProduct('${product.id}')"><img src=images/edit.png></button>
-          <button class="delete-btn" onclick="deleteProduct('${product.id}')"><img src=images/delete.png></button>
+          <button class="edit-btn" onclick="editProduct('${
+            product.id
+          }')"><img src="images/edit.png"></button>
+          <button class="delete-btn" onclick="deleteProduct('${
+            product.id
+          }')"><img src="images/delete.png"></button>
         </td>
       </tr>
     `;
   });
 
   inventoryTableBody.innerHTML = tableRows;
+  setupImageClickHandler();
 }
 
 // Function to show the popup
@@ -284,4 +343,38 @@ window.deleteProduct = function (productId) {
   cancelButton.onclick = function () {
     hidePopup();
   };
+};
+
+// Function to handle image click in the table
+function setupImageClickHandler() {
+  const imageElements = document.querySelectorAll(".product-image");
+
+  imageElements.forEach((img) => {
+    img.addEventListener("click", function () {
+      openLightbox(this.src);
+    });
+  });
+}
+
+// Function to open the lightbox modal with the clicked image
+function openLightbox(imageSrc) {
+  const lightboxModal = document.getElementById("lightboxModal");
+  const lightboxImage = document.getElementById("lightboxImage");
+
+  lightboxImage.src = imageSrc;
+  lightboxModal.style.display = "flex";
+}
+
+// Function to close the lightbox modal
+function closeLightbox() {
+  const lightboxModal = document.getElementById("lightboxModal");
+  lightboxModal.style.display = "none";
+}
+
+// Event listener for closing the lightbox modal when clicking outside the image
+window.onclick = function (event) {
+  const lightboxModal = document.getElementById("lightboxModal");
+  if (event.target === lightboxModal) {
+    closeLightbox();
+  }
 };
