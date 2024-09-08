@@ -1,0 +1,149 @@
+/* Inventory Container */
+.main-container {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+}
+
+/* Inventory Header */
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.inventory-header p {
+  font-size: 20px;
+}
+
+/* Inventory List */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 20px;
+  margin: 5px;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+}
+
+.table thead th {
+  color: black;
+}
+
+.table tbody td {
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.548);
+  text-align: center;
+}
+
+.table tbody tr {
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.table tbody tr:last-of-type {
+  border-bottom: 2px solid #dddddd;
+}
+
+/* Style for action buttons */
+.edit-btn,
+.delete-btn {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.edit-btn img,
+.delete-btn img {
+  width: 20px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  opacity: 0.8;
+}
+
+/* Pop up Successfully */
+.popup {
+  width: 400px;
+  background: #fefefe;
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: black;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s, visibility 0.4s;
+}
+
+.open-popup {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup img {
+  width: 100px;
+  margin-top: -50px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h2 {
+  font-size: 38px;
+  font-weight: 500px;
+  margin: 30px 0 10px;
+}
+
+.popup button {
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: #6fd649;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete Pop Up */
+.popup-content {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.popup-buttons {
+  margin-top: 20px;
+  display: flex; /* Align buttons in a row */
+  justify-content: center; /* Center buttons horizontally */
+}
+
+.popup-button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.popup-button.confirm {
+  background-color: #d9534f;
+  color: white;
+}
+
+.popup-button.cancel {
+  background-color: #5bc0de;
+  color: white;
+}
