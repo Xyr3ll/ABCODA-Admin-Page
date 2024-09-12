@@ -144,6 +144,18 @@
           </div>
         </div>
       </main>
+
+      <!-- Logout Confirmation Modal -->
+      <div id="logout-modal" class="modal-logout">
+        <div class="modal-content-logout">
+          <span class="close" onclick="closeLogoutModal()">&times;</span>
+          <h2>Are you sure you want to log out?</h2>
+          <div class="modal-buttons">
+            <button onclick="confirmLogout()">Yes</button>
+            <button onclick="closeLogoutModal()">No</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="js/sidebarheader.js"></script>
