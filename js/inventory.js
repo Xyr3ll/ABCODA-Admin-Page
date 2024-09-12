@@ -69,8 +69,9 @@ document
       `;
 
       inventoryTableBody.appendChild(row);
-      setupImageClickHandler();
     });
+
+    setupImageClickHandler();
   });
 
 // Function to open a modal with animation
