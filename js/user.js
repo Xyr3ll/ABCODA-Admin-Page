@@ -1,4 +1,4 @@
-import { db } from "./firebase/database.js"; // Make sure db is initialized properly
+import { db } from "./firebase/database.js"; // Ensure Firestore DB is initialized
 import {
   collection,
   getDocs,
@@ -6,6 +6,7 @@ import {
   deleteDoc,
   onSnapshot,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { getAuth, deleteUser as deleteAuthUser } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // Reference to the table body
 const userTableBody = document.getElementById("userTableBody");
@@ -13,7 +14,7 @@ const userTableBody = document.getElementById("userTableBody");
 // Function to fetch user data
 async function fetchUserData() {
   try {
-    const querySnapshot = await getDocs(collection(db, "users")); // Correct way to get the collection
+    const querySnapshot = await getDocs(collection(db, "users"));
 
     renderProducts(querySnapshot); // Render the initial data
 
@@ -28,12 +29,11 @@ function renderProducts(querySnapshot) {
   userTableBody.innerHTML = ""; // Clear the table body
 
   querySnapshot.forEach((doc) => {
-    const user = doc.data(); // Access user data
+    const user = doc.data();
 
     const defaultProfileImage = "images/defaultProfile.png"; // Set the path to your default image
     const deleteButtonImage = "images/delete.png"; // Set the path to your delete icon image
 
-    // Create a table row and insert user data into each cell
     const row = `
     <tr data-id="${doc.id}">
       <td>
@@ -47,14 +47,13 @@ function renderProducts(querySnapshot) {
       <td>${user.number}</td>
       <td>${user.otpVerified ? "Yes" : "No"}</td>
       <td>
-        <button class="delete-btn" onclick="deleteUser('${doc.id}')">
+        <button class="delete-btn" onclick="deleteUser('${doc.id}', '${user.email}')">
           <img src="${deleteButtonImage}" alt="Delete" width="20" height="20">
         </button>
       </td>
     </tr>
   `;
 
-    // Append the row to the table body
     userTableBody.innerHTML += row;
   });
 }
@@ -77,19 +76,19 @@ function setupRealTimeListener() {
 // Function to show the popup
 function showPopup() {
   const popup = document.getElementById("deletePopupUser");
-  popup.style.visibility = "visible"; // Make it visible
-  popup.style.transform = "translate(-50%, -50%) scale(1)"; // Reset scale to 1
+  popup.style.visibility = "visible";
+  popup.style.transform = "translate(-50%, -50%) scale(1)";
 }
 
 // Function to hide the popup
 function hidePopup() {
   const popup = document.getElementById("deletePopupUser");
-  popup.style.visibility = "hidden"; // Hide it
-  popup.style.transform = "translate(-50%, -50%) scale(0.1)"; // Scale down
+  popup.style.visibility = "hidden";
+  popup.style.transform = "translate(-50%, -50%) scale(0.1)";
 }
 
-// Example usage: showing the popup
-window.deleteUser = function (userId) {
+// Example usage: deleting the user from Firestore and Authentication
+window.deleteUser = function (userId, userEmail) {
   showPopup();
 
   const confirmButton = document.getElementById("confirmDeleteButton");
@@ -97,11 +96,25 @@ window.deleteUser = function (userId) {
 
   confirmButton.onclick = async function () {
     try {
+      // Delete the Firestore document
       await deleteDoc(doc(db, "users", userId));
       console.log("User successfully deleted from Firestore!");
+
+      // Delete the user from Firebase Authentication (Admin Privilege needed on server)
+      const auth = getAuth();
+
+      // Find and delete the user by their email in Authentication
+      const user = auth.currentUser; // You can only delete the current user in the client side
+      if (user && user.email === userEmail) {
+        await deleteAuthUser(user); 
+        console.log("User successfully deleted from Firebase Authentication!");
+      } else {
+        console.log("Admin rights required to delete other users.");
+      }
+
       hidePopup();
     } catch (error) {
-      console.error("Error deleting user from Firestore: ", error);
+      console.error("Error deleting user: ", error);
       alert("Failed to delete user. Please try again.");
     }
   };
