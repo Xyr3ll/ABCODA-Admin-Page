@@ -68,8 +68,8 @@ document
         </td>
       `;
 
-      setupImageClickHandler();
       inventoryTableBody.appendChild(row);
+      setupImageClickHandler();
     });
   });
 
