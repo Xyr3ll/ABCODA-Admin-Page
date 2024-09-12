@@ -88,7 +88,7 @@ function hidePopup() {
 }
 
 // Example usage: deleting the user from Firestore and Authentication
-window.deleteUser = function (userId, userEmail) {
+window.deleteUser = async function (email) {
   showPopup();
 
   const confirmButton = document.getElementById("confirmDeleteButton");
@@ -96,26 +96,20 @@ window.deleteUser = function (userId, userEmail) {
 
   confirmButton.onclick = async function () {
     try {
-      // Delete the Firestore document
-      await deleteDoc(doc(db, "users", userId));
-      console.log("User successfully deleted from Firestore!");
+      // Replace 'your-vercel-app.vercel.app' with your actual Vercel deployment URL
+      const response = await fetch(`https://abcoda-server.vercel.app/delete-user/${email}`, {
+        method: 'DELETE',
+      });
 
-      // Delete the user from Firebase Authentication (Admin Privilege needed on server)
-      const auth = getAuth();
-
-      // Find and delete the user by their email in Authentication
-      const user = auth.currentUser; // You can only delete the current user in the client side
-      if (user && user.email === userEmail) {
-        await deleteAuthUser(user); 
-        console.log("User successfully deleted from Firebase Authentication!");
+      if (response.ok) {
+        console.log('User successfully deleted from both Firestore and Authentication');
+        hidePopup();
       } else {
-        console.log("Admin rights required to delete other users.");
+        const errorText = await response.text();
+        console.error('Error deleting user:', errorText);
       }
-
-      hidePopup();
     } catch (error) {
-      console.error("Error deleting user: ", error);
-      alert("Failed to delete user. Please try again.");
+      console.error('Error deleting user:', error);
     }
   };
 
@@ -123,6 +117,7 @@ window.deleteUser = function (userId, userEmail) {
     hidePopup();
   };
 };
+
 
 // Call the fetchUserData function to populate the table on page load
 window.onload = fetchUserData;
