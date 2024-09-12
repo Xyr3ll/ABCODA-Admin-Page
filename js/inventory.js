@@ -45,14 +45,26 @@ document
       const row = document.createElement("tr");
 
       row.innerHTML = `
+          <td>
+          <img
+            src="${product.imageUrl || "images/default.png"}"
+            alt="${product.name}"
+            style="width: 100px; height: auto; border-radius: 10px"
+            class="product-image"
+            data-image-url="${product.imageUrl || "images/default.png"}"
+          />
         <td>${product.id}</td>
         <td>${product.name}</td>
         <td>${product.stock}</td>
         <td>${product.price}</td>
         <td>${product.category}</td>
         <td>
-          <button class="edit-btn" onclick="editProduct('${product.id}')"><img src=images/edit.png></button>
-          <button class="delete-btn" onclick="deleteProduct('${product.id}')"><img src=images/delete.png></button>
+          <button class="edit-btn" onclick="editProduct('${
+            product.id
+          }')"><img src=images/edit.png></button>
+          <button class="delete-btn" onclick="deleteProduct('${
+            product.id
+          }')"><img src=images/delete.png></button>
         </td>
       `;
 
