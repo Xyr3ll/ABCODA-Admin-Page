@@ -87,7 +87,6 @@ function hidePopup() {
   popup.style.transform = "translate(-50%, -50%) scale(0.1)";
 }
 
-// Example usage: deleting the user from Firestore and Authentication
 window.deleteUser = async function (email) {
   showPopup();
 
@@ -96,7 +95,6 @@ window.deleteUser = async function (email) {
 
   confirmButton.onclick = async function () {
     try {
-      // Replace 'your-vercel-app.vercel.app' with your actual Vercel deployment URL
       const response = await fetch(`https://abcoda-server.vercel.app/delete-user/${email}`, {
         method: 'DELETE',
       });
@@ -118,6 +116,4 @@ window.deleteUser = async function (email) {
   };
 };
 
-
-// Call the fetchUserData function to populate the table on page load
 window.onload = fetchUserData;
