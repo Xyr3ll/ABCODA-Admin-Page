@@ -38,7 +38,7 @@ function renderProducts(querySnapshot) {
     <tr data-id="${doc.id}">
       <td>
         <img src="${
-          user.profileImage || defaultProfileImage
+          user.ProfileImage || defaultProfileImage
         }" alt="Profile Image" width="50" height="50">
       </td>
       <td>${user.email}</td>
