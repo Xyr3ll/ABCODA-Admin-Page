@@ -58,6 +58,7 @@ document
         <td>${product.stock}</td>
         <td>${product.price}</td>
         <td>${product.category}</td>
+        <td>${product.description}</td>
         <td>
           <button class="edit-btn" onclick="editProduct('${
             product.id
@@ -147,6 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const productStock = document.getElementById("productStock").value;
     const productCategory = document.getElementById("flowers").value;
     const productImage = document.getElementById("productImage").files[0];
+    const productDesc = document.getElementById("productDescription").value;
+    const productRatings = 0.0;
 
     try {
       let imageUrl = "";
@@ -166,6 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
         stock: Number(productStock),
         category: productCategory,
         imageUrl: imageUrl,
+        description: productDesc,
+        ratings: productRatings,
         createdAt: new Date().toISOString(),
       });
 
@@ -196,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("editProductStock").value;
     const updatedProductCategory = document.getElementById("editFlowers").value;
     const productImage = document.getElementById("editProductImage").files[0];
+    const productDesc = document.getElementById("editProductDescription").value;
 
     try {
       const docRef = doc(db, "products", productId);
@@ -220,7 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
         price: Number(updatedProductPrice),
         stock: Number(updatedProductStock),
         category: updatedProductCategory,
-        imageUrl: imageUrl, // Update image URL
+        description: productDesc,
+        imageUrl: imageUrl,
         updatedAt: new Date().toISOString(),
       });
 
@@ -264,6 +271,8 @@ window.editProduct = async function (productId) {
       document.getElementById("editProductPrice").value = product.price;
       document.getElementById("editProductStock").value = product.stock;
       document.getElementById("editFlowers").value = product.category;
+      document.getElementById("editProductDescription").value =
+        product.description;
 
       // Set the image preview
       const imagePreview = document.getElementById("editProductImagePreview");
@@ -305,6 +314,8 @@ function renderProducts(querySnapshot) {
         <td>${product.stock}</td>
         <td>${product.price}</td>
         <td>${product.category}</td>
+        <td>${product.description}</td>
+        <td>${product.ratings}</td>
         <td>
           <button class="edit-btn" onclick="editProduct('${
             product.id
