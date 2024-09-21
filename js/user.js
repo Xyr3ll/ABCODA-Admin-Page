@@ -26,13 +26,13 @@ async function fetchUserData() {
 
 // Function to render the user data into the table
 function renderProducts(querySnapshot) {
-  userTableBody.innerHTML = ""; // Clear the table body
+  userTableBody.innerHTML = "";
 
   querySnapshot.forEach((doc) => {
     const user = doc.data();
 
-    const defaultProfileImage = "images/defaultProfile.png"; // Set the path to your default image
-    const deleteButtonImage = "images/delete.png"; // Set the path to your delete icon image
+    const defaultProfileImage = "images/defaultProfile.png";
+    const deleteButtonImage = "images/delete.png";
 
     const row = `
     <tr data-id="${doc.id}">
@@ -65,7 +65,7 @@ function setupRealTimeListener() {
   onSnapshot(
     usersCollection,
     (querySnapshot) => {
-      renderProducts(querySnapshot); // Render updated data
+      renderProducts(querySnapshot);
     },
     (error) => {
       console.error("Error fetching users from Firestore: ", error);
