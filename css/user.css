@@ -5,8 +5,8 @@
   padding: 20px 20px;
 }
 
-/* Inventory Header */
-.inventory-header {
+/* User Header */
+.user-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,11 +14,11 @@
   color: black;
 }
 
-.inventory-header p {
+.user-header p {
   font-size: 20px;
 }
 
-/* Inventory List */
+/* Header List */
 .table {
   width: 100%;
   border-collapse: separate;

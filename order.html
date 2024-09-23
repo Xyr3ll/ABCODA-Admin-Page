@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/sidebarheader.css" />
-    <link rel="stylesheet" href="css/user.css" />
+    <link rel="stylesheet" href="css/order.css" />
     <link rel="stylesheet" href="css/logout.css" />
   </head>
   <body>
@@ -94,25 +94,28 @@
 
       <!--Main Content-->
       <main class="main-container">
-        <div class="user-header">
-          <p class="font-weight-bold">USER ACCOUNTS</p>
+        <div class="order-header">
+          <p class="font-weight-bold">ORDERS</p>
         </div>
 
-        <div class="user-list">
-          <div class="user-item">
+        <div class="order-list">
+          <div class="order-item">
             <table class="table">
               <thead>
                 <tr>
-                  <th>Profile Image</th>
+                  <th>Order ID</th>
                   <th>Email</th>
                   <th>Name</th>
-                  <th>Gender</th>
+                  <th>
+                    Address <br />
+                    (Shop or Customer Address)
+                  </th>
                   <th>Mobile Number</th>
-                  <th>isVerified</th>
+                  <th>Total Price</th>
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody id="userTableBody">
+              <tbody id="orderTableBody">
                 <!-- Data will be inserted here -->
               </tbody>
             </table>
