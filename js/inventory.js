@@ -149,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const productCategory = document.getElementById("flowers").value;
     const productImage = document.getElementById("productImage").files[0];
     const productDesc = document.getElementById("productDescription").value;
-    const productRatings = 0.0;
 
     try {
       let imageUrl = "";
@@ -170,7 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
         category: productCategory,
         imageUrl: imageUrl,
         description: productDesc,
-        ratings: Number(productRatings),
         createdAt: new Date().toISOString(),
       });
 
