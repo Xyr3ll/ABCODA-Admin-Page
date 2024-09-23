@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         category: productCategory,
         imageUrl: imageUrl,
         description: productDesc,
-        ratings: productRatings,
+        ratings: Number(productRatings),
         createdAt: new Date().toISOString(),
       });
 
@@ -315,7 +315,7 @@ function renderProducts(querySnapshot) {
         <td>${product.price}</td>
         <td>${product.category}</td>
         <td>${product.description}</td>
-        <td>${product.ratings}</td>
+        <td>${product.totalRatings}</td>
         <td>
           <button class="edit-btn" onclick="editProduct('${
             product.id
