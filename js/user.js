@@ -1,4 +1,4 @@
-import { db } from "./firebase/database.js"; // Ensure Firestore DB is initialized
+import { db } from "./firebase/database.js";
 import {
   collection,
   getDocs,
@@ -16,9 +16,9 @@ async function fetchUserData() {
   try {
     const querySnapshot = await getDocs(collection(db, "users"));
 
-    renderProducts(querySnapshot); // Render the initial data
+    renderProducts(querySnapshot); 
 
-    setupRealTimeListener(); // Set up real-time updates
+    setupRealTimeListener(); 
   } catch (error) {
     console.error("Error fetching user data: ", error);
   }

@@ -104,14 +104,16 @@
               <thead>
                 <tr>
                   <th>Order ID</th>
-                  <th>Email</th>
-                  <th>Name</th>
+                  <th>Customer Name</th>
+                  <th>Item Name</th>
                   <th>
                     Address <br />
                     (Shop or Customer Address)
                   </th>
-                  <th>Mobile Number</th>
                   <th>Total Price</th>
+                  <th>Proof image</th>
+                  <th>Status</th>
+                  <th>Approval</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -167,10 +169,49 @@
       </div>
     </div>
 
+    <!-- Popup for Approve Confirmation -->
+    <div class="popup" id="approvePopup" style="display: none">
+      <div class="popup-content">
+        <h2>Are you sure?</h2>
+        <p id="approveConfirmationMessage"></p>
+        <div class="popup-buttons">
+          <button id="confirmApproveButton" class="popup-button confirm">
+            YES
+          </button>
+          <button
+            id="cancelApproveButton"
+            class="popup-button cancel"
+            onclick="closeApprovePopup()"
+          >
+            NO
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup Structure -->
+    <div id="statusPopup" class="popup">
+      <div class="popup-content">
+        <div class="popup-header">Confirm Status Change</div>
+        <div id="popupMessage" class="popup-message">
+          Are you sure you want to change the status for [Customer Name] to [New
+          Status]?
+        </div>
+        <div class="button-container">
+          <button id="confirmStatusButton" class="confirm-button">
+            Confirm
+          </button>
+          <button onclick="hidePopup()" class="cancel-button" style="margin-left: 10px">
+            Cancel
+        </button>        
+        </div>
+      </div>
+    </div>
+
     <script src="js/sidebarheader.js"></script>
     <script src="js/logout.js"></script>
 
-    <script type="module" src="js/user.js"></script>
+    <script type="module" src="js/order.js"></script>
     <script type="module" src="js/firebase/database.js"></script>
   </body>
 </html>

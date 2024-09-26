@@ -50,19 +50,12 @@
 }
 
 /* Style for action buttons */
-.edit-btn,
 .delete-btn {
   border: none;
   cursor: pointer;
   background-color: transparent;
 }
 
-.edit-btn img,
-.delete-btn img {
-  width: 20px;
-}
-
-.edit-btn:hover,
 .delete-btn:hover {
   opacity: 0.8;
 }
