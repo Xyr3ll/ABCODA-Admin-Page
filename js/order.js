@@ -4,6 +4,7 @@ import {
   getDocs,
   getDoc,
   doc,
+  onSnapshot,
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
@@ -61,20 +62,19 @@ function renderProducts(querySnapshot) {
           })()}
         </td>
         <td>
-          <img src="${
-            orders.approval ? "images/approve.png" : "images/disapprove.png"
-          }" 
-               alt="${orders.approval ? "Approved" : "Not Approved"}" 
-               width="20" height="20">
+          <button class="approve-btn" 
+                  onclick="approveOrder('${doc.id}', '${orders.customerName}', '${
+              orders.imageUrl
+            }')"
+                  style="background: none; border: none; padding: 0; cursor: pointer;">
+            <img src="${
+              orders.approval ? "images/approve.png" : "images/disapprove.png"
+            }" 
+                alt="${orders.approval ? "Approved" : "Not Approved"}" 
+                width="20" height="20">
+          </button>
         </td>
         <td>
-          <button class="approve-btn" 
-                  onclick="approveOrder('${doc.id}', '${
-      orders.customerName
-    }', '${orders.imageUrl}')">
-            <img src="${ApproveButton}" alt="Approve" width="20" height="20">
-          </button>
-
            <select class="status-select" 
           data-order-id="${doc.id}" 
           onchange="changeOrderStatus('${doc.id}', '${
@@ -138,31 +138,6 @@ window.approveOrder = async function (orderId, customerName, imageUrl) {
     console.error("Error approving order: ", error);
     alert("There was an error approving the order. Please try again.");
   }
-
-  // if (confirm(`Are you sure you want to approve the order for ${customerName}?`)) {
-  //   const newStatus = "Approved";
-
-  //   // Prepare the data to update in Firestore
-  //   const updateData = {
-  //     approval: true,
-  //   };
-
-  //   // Only include imageUrl if it exists
-  //   if (imageUrl) {
-  //     updateData.imageUrl = imageUrl; // Add imageUrl only if it's provided
-  //   }
-
-  //   // Update the order in Firestore using updateDoc
-  //   const orderRef = doc(db, "orders", orderId); // Reference to the specific document
-  //   try {
-  //     await updateDoc(orderRef, updateData);
-  //     alert(`Order for ${customerName} has been approved!`);
-  //     fetchOrdersData(); // Optionally refresh the data to see changes
-  //   } catch (error) {
-  //     console.error("Error approving order: ", error);
-  //     alert("There was an error approving the order. Please try again.");
-  //   }
-  // }
 };
 
 // Function to show the popup with a message and a confirm callback
@@ -223,5 +198,23 @@ window.changeOrderStatus = function (orderId, customerName) {
   );
 };
 
+// Function to set up real-time listener
+function setupRealTimeListener() {
+  const ordersCollection = collection(db, "orders");
+
+  onSnapshot(
+    ordersCollection,
+    (querySnapshot) => {
+      renderProducts(querySnapshot);
+    },
+    (error) => {
+      console.error("Error fetching products from Firestore: ", error);
+    }
+  );
+}
+
 // Fetch orders data when the window loads
-window.onload = fetchOrdersData;
+window.onload = async function () {
+  await fetchOrdersData(); 
+  setupRealTimeListener();  
+};
