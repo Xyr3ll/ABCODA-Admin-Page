@@ -1,4 +1,4 @@
-import { db } from "./firebase/database.js"; // Ensure this imports your Firestore instance
+import { db } from "../firebase/database.js"; 
 import {
   collection,
   getDocs,
@@ -32,19 +32,18 @@ function renderProducts(querySnapshot) {
   querySnapshot.forEach((doc) => {
     const orders = doc.data();
     const defaultProfileImage = "./images/defaultProfile.png";
-    const ApproveButton = "./images/approve.png";
-    const StatusButton = "./images/status.png";
 
     const row = `
       <tr data-id="${doc.id}">
         <td>${orders.orderId}</td>
         <td>${orders.customerName}</td>
-        <td>${orders.itemName}</td>
-        <td>${orders.deliveryAddress}</td>
-        <td>${orders.price}</td>
+        <td>${orders.flowerName}</td>
+        <td>${orders.customerAddress}</td>
+        <td>${orders.flowerTotalPrice}</td>
+        <td>${orders.shippingMethod}</td>
         <td>
           <img src="${
-            orders.imageUrl || defaultProfileImage
+            orders.imageProof || defaultProfileImage
           }" alt="Order Image" width="50" height="50">
         </td>
         <td>
@@ -124,9 +123,9 @@ window.approveOrder = async function (orderId, customerName, imageUrl) {
     const confirmMessage = `Are you sure you want to ${action} the order for ${customerName}?`;
 
     if (confirm(confirmMessage)) {
-      // Only include imageUrl if it exists
+
       if (imageUrl) {
-        updateData.imageUrl = imageUrl; // Add imageUrl only if it's provided
+        updateData.imageUrl = imageUrl;
       }
 
       // Update the order in Firestore using updateDoc
