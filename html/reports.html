@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reports</title>
-    <link rel="stylesheet" href="css/responsivesidebar.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,9 +14,9 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/sidebarheader.css" />
-    <link rel="stylesheet" href="css/reports.css" />
-    <link rel="stylesheet" href="css/logout.css" />
+    <link rel="stylesheet" href="../css/sidebarheader.css" />
+    <link rel="stylesheet" href="../css/reports.css" />
+    <link rel="stylesheet" href="../css/logout.css" />
   </head>
   <body>
     <div class="grid-container">
@@ -30,12 +29,6 @@
           <span class="header-title">REPORTS</span>
         </div>
         <div class="header-right">
-          <div class="notification-container">
-            <span class="material-icons-outlined" onclick="toggleNotification()"
-              >notifications</span
-            >
-            <span class="badge" id="notificationBadge">0</span>
-          </div>
           <div
             class="notification-box"
             id="notificationBox"
@@ -218,6 +211,18 @@
             </select>
             <div id="sales-chart"></div>
           </div>
+
+          <!-- Logout Confirmation Modal -->
+          <div id="logout-modal" class="modal-logout">
+            <div class="modal-content-logout">
+              <span class="close" onclick="closeLogoutModal()">&times;</span>
+              <h2>Are you sure you want to log out?</h2>
+              <div class="modal-buttons">
+                <button onclick="confirmLogout()">Yes</button>
+                <button onclick="closeLogoutModal()">No</button>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
@@ -231,20 +236,20 @@
     ></script>
 
     <!-- CHARTS -->
-    <script type="module" src="js/report/SalesChart.js"></script>
-    <script type="module" src="js/report/SalesRevenue.js"></script>
+    <script type="module" src="../js/report/SalesChart.js"></script>
+    <script type="module" src="../js/report/SalesRevenue.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="js/sidebarheader.js"></script>
+    <script src="../js/sidebarheader.js"></script>
 
-    <script type="module" src="js/report/sales.js"></script>
-    <script type="module" src="js/report/ratings.js"></script>
-    <script type="module" src="js/report/ordersInfo.js"></script>
-    <script type="module" src="js/report/ActiveUsers.js"></script>
+    <script type="module" src="../js/report/sales.js"></script>
+    <script type="module" src="../js/report/ratings.js"></script>
+    <script type="module" src="../js/report/ordersInfo.js"></script>
+    <script type="module" src="../js/report/ActiveUsers.js"></script>
 
-    <script type="module" src="js/dashboard/recentorder.js"></script>
-    <script type="module" src="js/dashboard/recentcustomer.js"></script>
-    <script type="module" src="js/notification/notification.js"></script>
-    <script src="js/logout.js"></script>
+    <script type="module" src="../js/dashboard/recentorder.js"></script>
+    <script type="module" src="../js/dashboard/recentcustomer.js"></script>
+    <script type="module" src="../js/notification/notification.js"></script>
+    <script src="../js/logout.js"></script>
   </body>
 </html>

@@ -31,8 +31,8 @@ function renderProducts(querySnapshot) {
   querySnapshot.forEach((doc) => {
     const user = doc.data();
 
-    const defaultProfileImage = "images/defaultProfile.png";
-    const deleteButtonImage = "images/delete.png";
+    const defaultProfileImage = "../images/defaultProfile.png";
+    const deleteButtonImage = "../images/delete.png";
 
     const row = `
     <tr data-id="${doc.id}">

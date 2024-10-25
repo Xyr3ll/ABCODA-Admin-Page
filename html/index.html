@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="css/responsivesidebar.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,11 +15,11 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/sidebarheader.css" />
-    <link rel="stylesheet" href="css/dashboard.css" />
-    <link rel="stylesheet" href="css/logout.css" />
+    <link rel="stylesheet" href="../css/sidebarheader.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/logout.css" />
 
-    <script defer src="js/sidebarheader.js"></script>
+    <script defer src="../js/sidebarheader.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -33,12 +32,6 @@
           <span class="header-title">DASHBOARD</span>
         </div>
         <div class="header-right">
-          <div class="notification-container">
-            <span class="material-icons-outlined" onclick="toggleNotification()"
-              >notifications</span
-            >
-            <span class="badge" id="notificationBadge">0</span>
-          </div>
           <div
             class="notification-box"
             id="notificationBox"
@@ -212,15 +205,15 @@
     ></script>
 
     <!-- CHARTS-->
-      <script type="module" src="js/dashboard/topproduct.js"></script>
-      <script type="module" src="js/dashboard/topuser.js"></script>
+      <script type="module" src="../js/dashboard/topproduct.js"></script>
+      <script type="module" src="../js/dashboard/topuser.js"></script>
 
     <!--CUSTOM JS-->
-    <script type="module" src="js/notification/notification.js"></script>
-    <script type="module" src="js/dashboard/recentorder.js"></script>
-    <script type="module" src="js/dashboard/recentcustomer.js"></script>
-    <script type="module" src="js/dashboard/products.js"></script>
-    <script type="module" src="js/dashboard/orders.js"></script>
-    <script src="js/logout.js"></script>
+    <script type="module" src="../js/notification/notification.js"></script>
+    <script type="module" src="../js/dashboard/recentorder.js"></script>
+    <script type="module" src="../js/dashboard/recentcustomer.js"></script>
+    <script type="module" src="../js/dashboard/products.js"></script>
+    <script type="module" src="../js/dashboard/orders.js"></script>
+    <script src="../js/logout.js"></script>
   </body>
 </html>

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         usersList.innerHTML = "";
 
         userSnapshot.forEach((doc) => {
-            const user = doc.data(); // Get the user data
+            const user = doc.data();
 
             // Create a new row element
             const row = document.createElement("tr");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Create the profile image with fallback if image URL is not present
             const profileImage = user.ProfileImage
                 ? `<img src="${user.ProfileImage}" alt="Profile Image" width="50" height="50" style="border-radius: 50%;">`
-                : `<img src="images/defaultProfile.png" alt="Default Profile" width="50" height="50" style="border-radius: 50%;">`;
+                : `<img src="../images/defaultProfile.png" alt="Default Profile" width="50" height="50" style="border-radius: 50%;">`;
 
             // Define the row structure
             row.innerHTML = `

@@ -30,7 +30,7 @@ function renderProducts(querySnapshot) {
 
   querySnapshot.forEach((doc) => {
     const orders = doc.data();
-    const defaultProfileImage = "./images/defaultProfile.png";
+    const defaultProfileImage = "../images/defaultProfile.png";
 
     // Extract flower names from the flowerItems array
     const flowerNames = orders.flowerItems
@@ -72,7 +72,7 @@ function renderProducts(querySnapshot) {
             }')"
                   style="background: none; border: none; padding: 0; cursor: pointer;">
             <img src="${
-              orders.approved ? "images/approve.png" : "images/disapprove.png"
+              orders.approved ? "../images/approve.png" : "../images/disapprove.png"
             }" 
                 alt="${orders.approved ? "Approved" : "Not Approved"}" 
                 width="20" height="20">
