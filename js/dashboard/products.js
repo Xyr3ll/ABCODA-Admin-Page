@@ -1,12 +1,15 @@
-import { db } from "../firebase/database.js"; // Ensure you have imported your Firestore database
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { db } from "../firebase/database.js";
+import {
+  collection,
+  getDocs,
+} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 // Function to fetch the number of products
 async function fetchProductCount() {
   try {
-    const productsCollection = collection(db, "products"); 
-    const productDocs = await getDocs(productsCollection); 
-    
+    const productsCollection = collection(db, "products");
+    const productDocs = await getDocs(productsCollection);
+
     const productCount = productDocs.size; // Get the number of documents in the collection
 
     // Update the product count in the HTML

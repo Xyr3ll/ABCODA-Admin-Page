@@ -16,7 +16,7 @@ function closeLogoutModal() {
 
 // Function to confirm logout
 function confirmLogout() {
-  window.location.href = 'https://xyr3ll.github.io/ABCODA-Landing-Page/';
+  window.location.href = 'https://landing-lilac-two.vercel.app/';
 }
 
 // Event listener to close the modal when clicking outside of the modal content
@@ -26,7 +26,7 @@ window.onclick = function(event) {
   }
 }
 
-document.querySelector('.sidebar-list-item a[href="#"]').addEventListener('click', function(event) {
+document.querySelector('.sidebar-list-item a[href="logout"]').addEventListener('click', function(event) {
   event.preventDefault();
   openLogoutModal();
 });

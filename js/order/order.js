@@ -25,7 +25,6 @@ async function fetchOrdersData() {
 // Reference to the table body
 const orderTableBody = document.getElementById("orderTableBody");
 
-// Function to render the orders data into the table
 function renderProducts(querySnapshot) {
   orderTableBody.innerHTML = ""; // Clear the table body
 
@@ -33,19 +32,25 @@ function renderProducts(querySnapshot) {
     const orders = doc.data();
     const defaultProfileImage = "./images/defaultProfile.png";
 
+    // Extract flower names from the flowerItems array
+    const flowerNames = orders.flowerItems
+      .map((flower) => flower.name) 
+      .join(", ");
+
     const row = `
       <tr data-id="${doc.id}">
         <td>${orders.orderId}</td>
         <td>${orders.customerName}</td>
-        <td>${orders.flowerName}</td>
+        <td>${flowerNames}</td>
         <td>${orders.customerAddress}</td>
-        <td>${orders.flowerTotalPrice}</td>
+        <td>${orders.flowerItems.reduce((total, item) => total + item.totalPrice, 0)}</td>
         <td>${orders.shippingMethod}</td>
         <td>
           <img src="${
             orders.imageProof || defaultProfileImage
           }" alt="Order Image" width="50" height="50">
         </td>
+        <td>${orders.orderDate}</td>
         <td>
           ${(() => {
             switch (orders.status) {
@@ -67,9 +72,9 @@ function renderProducts(querySnapshot) {
             }')"
                   style="background: none; border: none; padding: 0; cursor: pointer;">
             <img src="${
-              orders.approval ? "images/approve.png" : "images/disapprove.png"
+              orders.approved ? "images/approve.png" : "images/disapprove.png"
             }" 
-                alt="${orders.approval ? "Approved" : "Not Approved"}" 
+                alt="${orders.approved ? "Approved" : "Not Approved"}" 
                 width="20" height="20">
           </button>
         </td>
@@ -93,9 +98,10 @@ function renderProducts(querySnapshot) {
       </tr>
     `;
 
-    orderTableBody.innerHTML += row; // Add the new row to the table
+    orderTableBody.innerHTML += row;
   });
 }
+
 
 // Approve Order Function
 window.approveOrder = async function (orderId, customerName, imageUrl) {
@@ -112,14 +118,14 @@ window.approveOrder = async function (orderId, customerName, imageUrl) {
     }
 
     const orderData = orderDoc.data();
-    const currentApprovalStatus = orderData.approval;
+    const currentApprovalStatus = orderData.approved;
 
     let updateData = {
-      approval: !currentApprovalStatus,
+      approved: !currentApprovalStatus,
     };
 
     // Set new status message based on approval status
-    const action = updateData.approval ? "approve" : "not approve";
+    const action = updateData.approved ? "approve" : "not approve";
     const confirmMessage = `Are you sure you want to ${action} the order for ${customerName}?`;
 
     if (confirm(confirmMessage)) {
@@ -217,3 +223,32 @@ window.onload = async function () {
   await fetchOrdersData(); 
   setupRealTimeListener();  
 };
+
+function sortOrders(criteria) {
+  const rows = Array.from(orderTableBody.getElementsByTagName("tr"));
+
+  rows.sort((a, b) => {
+    if (criteria === "Date") {
+      const dateA = new Date(a.cells[7].innerText);
+      const dateB = new Date(b.cells[7].innerText);
+      return dateB - dateA;
+    }
+
+    if (criteria === "Sales") {
+      const totalA = parseFloat(a.cells[4].innerText); 
+      const totalB = parseFloat(b.cells[4].innerText);
+      return totalB - totalA; 
+    }
+    return 0;
+  });
+
+  orderTableBody.innerHTML = "";
+  rows.forEach((row) => orderTableBody.appendChild(row));
+}
+
+// Add event listener to the combo box for sorting
+document.getElementById("combo-box").addEventListener("change", function () {
+  const selectedValue = this.value;
+  sortOrders(selectedValue);
+});
+

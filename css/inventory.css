@@ -8,10 +8,18 @@
 /* Inventory Header */
 .inventory-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   margin-bottom: 20px;
   color: black;
+}
+
+.header-title {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .inventory-header p {
@@ -27,7 +35,7 @@
   background-color: #009879;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
@@ -69,22 +77,28 @@
 .table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0px 20px;
-  margin: 5px;
-  font-size: 0.9em;
+  border-spacing: 0px 10px;
+  font-size: 0.8em;
   min-width: 400px;
   border-radius: 5px 5px 0 0;
   padding: 10px;
+  table-layout: fixed;
+  overflow-x: auto;
 }
 
 .table thead th {
   color: black;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .table tbody td {
-  padding: 16px;
+  padding: 12px;
   color: rgba(0, 0, 0, 0.548);
   text-align: center;
+  word-wrap: break-word; 
+  overflow: hidden; 
+  max-width: 150px; 
 }
 
 .table tbody tr {
@@ -304,8 +318,8 @@ form button[type="submit"]:hover {
 
 .popup-buttons {
   margin-top: 20px;
-  display: flex; /* Align buttons in a row */
-  justify-content: center; /* Center buttons horizontally */
+  display: flex; 
+  justify-content: center;
 }
 
 .popup-button {
@@ -325,4 +339,64 @@ form button[type="submit"]:hover {
 .popup-button.cancel {
   background-color: #5bc0de;
   color: white;
+}
+
+/* Media Queries for Responsive Table Styling */
+@media (max-width: 768px) {
+
+
+  .table {
+    display: block; 
+    white-space: nowrap; 
+    width: 100%; /* Ensure full width */
+    
+  }
+
+  .table thead {
+    display: table-header-group; 
+    
+  }
+
+  .table tbody {
+    display:contents; 
+    overflow-x: auto; 
+    white-space: nowrap; 
+  }
+
+  .table tbody tr {
+    margin-bottom: 10px; /* Space between rows */
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+
+  .table tbody td {
+    flex: 1; /* Allow cells to grow and fill available space */
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    min-width: 150px; /* Minimum width to maintain structure */
+    
+  }
+
+  .table tbody td::before {
+    content: attr(data-label); /* Uses the label as a pseudo-element */
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    color: #333; /* Adjust color */
+    width: 5px; /* Adjust label width as needed */
+  }
+}
+
+/* Additional Responsive Styles for Larger Screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .table {
+    font-size: 0.9em; /* Adjust font size for medium screens */
+  }
+}
+
+/* Styles for Large Laptops and Desktops */
+@media (min-width: 1025px) {
+  .table {
+    font-size: 1em; /* Default font size for larger screens */
+  }
 }

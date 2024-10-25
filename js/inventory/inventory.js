@@ -55,10 +55,9 @@ document
           />
         <td>${product.id}</td>
         <td>${product.name}</td>
-        <td>${product.stock}</td>
         <td>${product.price}</td>
         <td>${product.category}</td>
-        <td>${product.description}</td>
+        <td>${product.totalRatings}</td>
         <td>
           <button class="edit-btn" onclick="editProduct('${
             product.id
@@ -162,6 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
         imageUrl = await getDownloadURL(storageRef);
       }
 
+      let totalRatings = 0;
+
       const docRef = await addDoc(collection(db, "products"), {
         name: productName,
         price: Number(productPrice),
@@ -169,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         category: productCategory,
         imageUrl: imageUrl,
         description: productDesc,
+        totalRatings: totalRatings,
         createdAt: new Date().toISOString(),
       });
 
@@ -309,10 +311,8 @@ function renderProducts(querySnapshot) {
           />
         <td>${product.id}</td>
         <td>${product.name}</td>
-        <td>${product.stock}</td>
         <td>${product.price}</td>
         <td>${product.category}</td>
-        <td>${product.description}</td>
         <td>${product.totalRatings}</td>
         <td>
           <button class="edit-btn" onclick="editProduct('${

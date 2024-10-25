@@ -1,97 +1,55 @@
 import { db } from "../firebase/database.js";
 import {
   collection,
-  getDocs,
   getDoc,
   doc,
   onSnapshot,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-// Define the bar chart with empty data initially
-let barChartOptions = {
-  series: [
-    {
-      name: "Orders",
-      data: [], // Start with no data
-    },
-  ],
+let pieChartOptions = {
+  series: [],
   chart: {
-    type: "bar",
+    type: "pie",
     height: 350,
-    toolbar: {
-      show: false,
-    },
+    width: "100%",
   },
+  labels: [], // Start with no labels
   colors: ["#246dec", "#cc3c43", "#367952", "#f5b74f", "#4f35a1"],
-  plotOptions: {
-    bar: {
-      distributed: true,
-      borderRadius: 4,
-      horizontal: false,
-      columnWidth: "40%",
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
   legend: {
-    show: false,
-  },
-  xaxis: {
-    categories: [], // Start with no categories
-  },
-  yaxis: {
-    title: {
-      text: "Count",
-    },
+    position: "left",
   },
 };
 
-// Initialize the bar chart
-let barChart = new ApexCharts(
-  document.querySelector("#bar-chart"),
-  barChartOptions
+// Initialize the pie chart
+let pieChart = new ApexCharts(
+  document.querySelector("#pie-chart"),
+  pieChartOptions
 );
-barChart.render();
+pieChart.render();
 
-// Function to fetch product details for top products
-async function fetchProductDetails(topProducts) {
-  // Log topProducts to check if it is defined and has data
-  console.log("Top Products:", topProducts);
-
-  return await Promise.all(
-    topProducts.map(async (product) => {
-      try {
-        const productDoc = await getDoc(doc(db, "products", product.productId));
-        return { ...productDoc.data(), sales: product.sales };
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-        return null; // Return null for error handling
-      }
-    })
-  );
-}
-
-// Function to fetch top products and update the chart
 // Function to fetch top products and update the chart
 async function fetchTopProducts() {
   let productSales = {};
 
-  // Use onSnapshot to listen for changes in the 'orders' collection
   onSnapshot(collection(db, "orders"), (snapshot) => {
-    productSales = {};
+    productSales = {}; // Reset sales data for each snapshot
 
     snapshot.forEach((doc) => {
       const orderData = doc.data();
-      const productId = orderData.productId;
-      const quantity = orderData.quantity || 1;
+      const flowerItems = orderData.flowerItems || [];
 
-      // Accumulate sales for each product
-      if (productSales[productId]) {
-        productSales[productId] += quantity;
-      } else {
-        productSales[productId] = quantity;
-      }
+      // Loop through each item in flowerItems array and accumulate sales
+      flowerItems.forEach((item) => {
+        const productId = item.productId;
+        const quantity = item.quantity || 1;
+
+        // Accumulate sales for each product
+        if (productSales[productId]) {
+          productSales[productId] += quantity;
+        } else {
+          productSales[productId] = quantity;
+        }
+      });
     });
 
     // Convert the sales object into an array of product IDs and sales
@@ -131,23 +89,21 @@ async function fetchTopProducts() {
         console.log("Top Product Names:", topProductNames);
         console.log("Top Product Sales:", topProductSales);
 
-        // Update Bar Chart with the top products based on sales
-        barChart.updateOptions({
-          series: [{ name: "Orders", data: topProductSales }],
-          xaxis: { categories: topProductNames },
+        // Update Pie Chart with the top products based on sales
+        pieChart.updateOptions({
+          series: topProductSales,
+          labels: topProductNames, 
         });
       } else {
         console.warn("No valid product details found. Resetting chart data.");
 
-        // Optionally reset chart data if no products are found
-        barChart.updateOptions({
-          series: [{ name: "Orders", data: [] }],
-          xaxis: { categories: [] },
+        pieChart.updateOptions({
+          series: [],
+          labels: [],
         });
       }
     });
   });
 }
 
-// Call the function to start listening for updates
 fetchTopProducts();

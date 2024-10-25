@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
+    <title>Reports</title>
     <link rel="stylesheet" href="css/responsivesidebar.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,10 +16,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/sidebarheader.css" />
-    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/reports.css" />
     <link rel="stylesheet" href="css/logout.css" />
-
-    <script defer src="js/sidebarheader.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -30,7 +27,7 @@
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-left">
-          <span class="header-title">DASHBOARD</span>
+          <span class="header-title">REPORTS</span>
         </div>
         <div class="header-right">
           <div class="notification-container">
@@ -69,9 +66,11 @@
             class="material-icons-outlined"
             id="close"
             onclick="closeSidebar()"
-            >close</span
           >
+            close
+          </span>
         </div>
+
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
             <a href="index.html">
@@ -99,7 +98,7 @@
           </li>
           <li class="sidebar-list-item">
             <a href="order.html">
-              <span class="material-icons-outlined">inventory</span>
+              <span class="material-icons-outlined"> inventory </span>
               Orders
             </a>
           </li>
@@ -115,46 +114,19 @@
 
       <!--Main-->
       <main class="main-container">
-        <div class="main-cards">
-          <div class="card">
-            <div class="card-inner">
-              <p class="text-primary">FLOWER PRODUCTS</p>
-              <span class="material-icons-outlined text-blue">inventory_2</span>
-            </div>
-            <span id="product-count" class="text-primary font-weight-bold"
-              >0</span
-            >
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <p class="text-primary">FLOWER ORDERS</p>
-              <span class="material-icons-outlined text-blue"
-                >shopping_cart</span
-              >
-            </div>
-            <span id="orders-count" class="text-primary font-weight-bold"
-              >0</span
-            >
-          </div>
-        </div>
-
-        <div class="charts">
-          <div class="charts-card">
-            <p class="chart-title">Top 5 Flowers</p>
-            <div id="pie-chart"></div>
-          </div>
-
-          <div class="charts-card">
-            <p class="chart-title">Users</p>
-            <div id="line-chart"></div>
-          </div>
+        <div class="choices-container">
+          <select id="combo-box" class="combo-box">
+            <option value="TODAY">TODAY</option>
+            <option value="WEEKLY">WEEKLY</option>
+            <option value="MONTHLY">MONTHLY</option>
+            <option value="YEARLY">YEARLY</option>
+          </select>
         </div>
 
         <div class="details">
           <div class="recentOrders">
             <div class="cardHeader">
-              <h2>Recent Orders</h2>
+              <h2>Orders</h2>
               <a href="order.html" class="btn">View All</a>
             </div>
             <div class="table-container">
@@ -175,35 +147,82 @@
 
           <div class="recentCustomers">
             <div class="cardHeader">
-              <h2>Recent Customers</h2>
+              <h2>Customers</h2>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <td>Profile Image</td>
-                  <td>Email</td>
-                </tr>
-              </thead>
-              <tbody id="customerTableBody"></tbody>
-            </table>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <td>Profile Image</td>
+                    <td>Email</td>
+                  </tr>
+                </thead>
+                <tbody id="customerTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="main-cards">
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary" id="sales-p">TODAY'S SALES</p>
+              </div>
+              <span id="product-count" class="text-primary font-weight-bold"
+                >0</span
+              >
+            </div>
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary" id="ratings-p">FLOWER'S RATING</p>
+              </div>
+              <span id="ratings-count" class="text-primary font-weight-bold"
+                >0</span
+              >
+            </div>
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary" id="orders-p">TODAY'S ORDERS</p>
+              </div>
+              <span id="orders-count" class="text-primary font-weight-bold"
+                >0</span
+              >
+            </div>
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary" id="visitors-p">ACTIVE USERS</p>
+              </div>
+              <span id="visitors-count" class="text-primary font-weight-bold"
+                >0</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="charts">
+          <div class="charts-card">
+            <p class="chart-title">Sales Revenue</p>
+            <select id="revenue-view" style="margin-bottom: 10px">
+              <option value="daily">Daily</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+            <div id="revenue-chart"></div>
+          </div>
+
+          <div class="charts-card">
+            <p class="chart-title">Sales Quantity</p>
+            <select id="sales-view" style="margin-bottom: 10px">
+              <option value="daily">Daily</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+            <div id="sales-chart"></div>
           </div>
         </div>
       </main>
     </div>
 
-    <!-- Logout Confirmation Modal -->
-    <div id="logout-modal" class="modal-logout">
-      <div class="modal-content-logout">
-        <span class="close" onclick="closeLogoutModal()">&times;</span>
-        <h2>Are you sure you want to log out?</h2>
-        <div class="modal-buttons">
-          <button onclick="confirmLogout()">Yes</button>
-          <button onclick="closeLogoutModal()">No</button>
-        </div>
-      </div>
-    </div>
-
-    <!--SCRIPTS-->
+    <!--ApexCharts-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.52.0/apexcharts.min.js"
       integrity="sha512-piY4QAXPoG2xLdUZZbcc5klXzMxckrQKY9A2o6nKDRt9inolvvLbvGPC+z9IZ29b28UJlD05B7CjxxPaxh4bjQ=="
@@ -211,16 +230,21 @@
       referrerpolicy="no-referrer"
     ></script>
 
-    <!-- CHARTS-->
-      <script type="module" src="js/dashboard/topproduct.js"></script>
-      <script type="module" src="js/dashboard/topuser.js"></script>
+    <!-- CHARTS -->
+    <script type="module" src="js/report/SalesChart.js"></script>
+    <script type="module" src="js/report/SalesRevenue.js"></script>
 
-    <!--CUSTOM JS-->
-    <script type="module" src="js/notification/notification.js"></script>
+    <!-- CUSTOM JS -->
+    <script src="js/sidebarheader.js"></script>
+
+    <script type="module" src="js/report/sales.js"></script>
+    <script type="module" src="js/report/ratings.js"></script>
+    <script type="module" src="js/report/ordersInfo.js"></script>
+    <script type="module" src="js/report/ActiveUsers.js"></script>
+
     <script type="module" src="js/dashboard/recentorder.js"></script>
     <script type="module" src="js/dashboard/recentcustomer.js"></script>
-    <script type="module" src="js/dashboard/products.js"></script>
-    <script type="module" src="js/dashboard/orders.js"></script>
+    <script type="module" src="js/notification/notification.js"></script>
     <script src="js/logout.js"></script>
   </body>
 </html>

@@ -1,148 +1,258 @@
 body {
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
 .main-container {
-    grid-area: main;
-    overflow-y: auto;
-    padding: 20px 20px;
-  
-  }
-  
-  .main-title {
-    display: flex;
-    justify-content: space-between;
-    color: black;
-  }
-  
-  .main-title > p {
-    font-size: 20px;
-  }
-  
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+}
+
+.header-title {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.main-title > p {
+  font-size: 20px;
+}
+
+.main-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border: 1px solid #d2d2d3;
+  border-radius: 5px;
+  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+}
+
+.card:first-child {
+  border-left: 7px solid #246dec;
+}
+
+.card:nth-child(2) {
+  border-left: 7px solid #f5b74f;
+}
+
+
+.card > span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-inner > p {
+  font-size: 18px;
+}
+
+.card-inner > span {
+  font-size: 35px;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.charts-card {
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding: 25px;
+  box-sizing: border-box;
+  border: 1px solid #d2d2d3;
+  border-radius: 5px;
+  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+  min-height: 310px;
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  color: black;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Container for scrollable table */
+.table-container {
+  max-height: 400px; 
+  overflow-y: auto; 
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #d2d2d3;
+}
+
+thead td {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+tbody td {
+  font-size: 16px;
+}
+
+/* Main container for details */
+.details {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  gap: 20px;
+  min-height: 350px;
+}
+
+.recentOrders, .recentCustomers {
+  padding: 40px;
+  background-color: #f9f9f9;
+  border: 1px solid #d2d2d3;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details h2 {
+  color: black;
+  margin-bottom: 15px;
+}
+
+
+/* ---------- SCROLLBARS ---------- */
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #a5aaad;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4f35a1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a5aaad;
+}
+
+/* ---------- MEDIA QUERIES ---------- */
+
+/* Small <= 768px */
+/* Medium screens <= 768px */
+@media screen and (max-width: 768px) {
+  /* Adjust main card layout to a single column */
   .main-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
-    margin: 20px 0;
+    margin-bottom: 20px;
   }
-  
-  .card {
+
+  /* Stack charts in a single column */
+  .charts {
+    grid-template-columns: 1fr;
+    gap: 0px;
+    margin-top: 20px;
+  }
+
+  /* Hide header-left for mobile */
+  .header-left {
+    display: none;
+  }
+
+  /* Ensure details section stacks content */
+  .details {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    padding: 25px;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    border: 1px solid #d2d2d3;
-    border-radius: 5px;
-    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    gap: 0px;
   }
-  
-  .card:first-child {
-    border-left: 7px solid #246dec;
+
+  /* Expand recent orders and recent customers to full width */
+  .recentOrders, .recentCustomers {
+    width: 100%;
   }
-  
-  .card:nth-child(2) {
-    border-left: 7px solid #f5b74f;
+
+  /* Adjust table container for mobile */
+  .table-container, .recentCustomers table {
+    overflow-x: auto;
+    display: block;
   }
-  
-  .card:nth-child(3) {
-    border-left: 7px solid #367952;
+
+  /* Ensure tables are scrollable on mobile */
+  .recentOrders table,
+  .recentCustomers table {
+    width: 100%;
+    min-width: 500px;
   }
-  
-  .card:nth-child(4) {
-    border-left: 7px solid #cc3c43;
+}
+
+/* Extra Small screens <= 576px */
+@media screen and (max-width: 576px) {
+  /* Hide header-left for very small screens */
+  .header-left {
+    display: none;
   }
-  
-  .card > span {
-    font-size: 20px;
-    font-weight: 600;
+
+  /* Ensure sidebar is closed by default on extra small screens */
+  #sidebar {
+    display: none;
   }
-  
-  .card-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+  /* Adjust header icons and spacing */
+  .header-right .material-icons-outlined {
+    font-size: 24px;
+    margin: 0 8px;
   }
-  
-  .card-inner > p {
-    font-size: 18px;
+
+  /* Adjust font sizes for smaller screens */
+  .header-title, .card-inner p {
+    font-size: 14px;
   }
-  
-  .card-inner > span {
-    font-size: 35px;
+
+  /* Decrease padding in main container */
+  .main-container {
+    padding: 10px;
+
   }
-  
-  .charts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  
+
+  /* Decrease chart card padding for smaller screens */
   .charts-card {
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    padding: 25px;
-    box-sizing: border-box;
-    -webkit-column-break-inside: avoid;
-    border: 1px solid #d2d2d3;
-    border-radius: 5px;
-    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    padding: 5px;
   }
-  
-  .chart-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 600;
-  }
-  
-  /* ---------- SCROLLBARS ---------- */
-  
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 6px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #a5aaad;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #4f35a1;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #a5aaad;
-  }
-  
-  /* ---------- MEDIA QUERIES ---------- */
-  
-  /* Small <= 768px */
-  @media screen and (max-width: 768px) {
-    .main-cards {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-bottom: 0;
-    }
-  
-    .charts {
-      grid-template-columns: 1fr;
-      margin-top: 30px;
-    }
-  
-    .header-left {
-      display: none;
-    }
-  }
-  
-  /* Extra Small <= 576px */
-  @media screen and (max-width: 576px) {
-    .header-left {
-      display: none;
-    }
-  }
-  
+}

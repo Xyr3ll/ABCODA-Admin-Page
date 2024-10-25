@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inventory</title>
-
+    <link rel="stylesheet" href="css/responsivesidebar.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,7 +27,7 @@
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-left">
-          <span class="material-icons-outlined">search</span>
+          <span class="header-title">PRODUCT INVENTORY</span>
         </div>
         <div class="header-right">
           <span class="material-icons-outlined">notifications </span>
@@ -84,7 +84,7 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#">
+            <a href="logout">
               <span class="material-icons-outlined">logout</span>
               Log-out
             </a>
@@ -96,7 +96,6 @@
       <!--Main Content-->
       <main class="main-container">
         <div class="inventory-header">
-          <p class="font-weight-bold">PRODUCT INVENTORY</p>
           <button class="add-product-btn">
             <span class="material-icons-outlined">add_circle_outline</span>
             Add Product
@@ -106,34 +105,37 @@
         <div class="select-container">
           <select class="select-box" name="flowers" id="categorySelect">
             <option value="All">All</option>
-            <option value="Birthday">Birthday</option>
-            <option value="Anniversary">Anniversary</option>
-            <option value="Funeral">Funeral</option>
-            <option value="Wedding">Wedding</option>
-            <option value="Valentines">Valentines</option>
+            <option value="Half Dozen Roses Bouquet">
+              Half Dozen Roses Bouquet
+            </option>
+            <option value="1 Dozen Roses Bouquet">1 Dozen Roses Bouquet</option>
+            <option value="2 Dozen Roses Bouquet">2 Dozen Roses Bouquet</option>
+            <option value="Sunflower Bouquet">Sunflower Bouquet</option>
+            <option value="Stargazer Bouquet">Stargazer Bouquet</option>
+            <option value="The VeeWise Special">The VeeWise Special</option>
           </select>
         </div>
 
         <div class="inventory-list">
           <div class="inventory-item">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Item ID</th>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>Ratings</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="inventoryTableBody">
-                <!-- Data will be inserted here -->
-              </tbody>
-            </table>
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Item ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Ratings</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                  <!-- Data will be inserted here -->
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- Modal for Adding Product -->
@@ -193,12 +195,20 @@
 
                 <label for="flowers" class="flowerLabel">Category:</label>
                 <select name="flowers" id="flowers">
-                  <option value="Birthday">Birthday</option>
-                  <option value="Anniversary">Anniversary</option>
-                  <option value="Funeral">Funeral</option>
-                  <option value="Wedding">Wedding</option>
-                  <option value="Valentines">Valentines</option>
-                  <option value="Apology">Apology</option>
+                  <option value="Half Dozen Roses Bouquet">
+                    Half Dozen Roses Bouquet
+                  </option>
+                  <option value="1 Dozen Roses Bouquet">
+                    1 Dozen Roses Bouquet
+                  </option>
+                  <option value="2 Dozen Roses Bouquet">
+                    2 Dozen Roses Bouquet
+                  </option>
+                  <option value="Sunflower Bouquet">Sunflower Bouquet</option>
+                  <option value="Stargazer Bouquet">Stargazer Bouquet</option>
+                  <option value="The VeeWise Special">
+                    The VeeWise Special
+                  </option>
                 </select>
 
                 <button type="submit">Add Product</button>
@@ -272,12 +282,20 @@
 
                 <label for="editFlowers" class="flowerLabel">Category:</label>
                 <select name="editFlowers" id="editFlowers">
-                  <option value="Birthday">Birthday</option>
-                  <option value="Anniversary">Anniversary</option>
-                  <option value="Funeral">Funeral</option>
-                  <option value="Wedding">Wedding</option>
-                  <option value="Valentines">Valentines</option>
-                  <option value="Apology">Apology</option>
+                  <option value="Half Dozen Roses Bouquet">
+                    Half Dozen Roses Bouquet
+                  </option>
+                  <option value="1 Dozen Roses Bouquet">
+                    1 Dozen Roses Bouquet
+                  </option>
+                  <option value="2 Dozen Roses Bouquet">
+                    2 Dozen Roses Bouquet
+                  </option>
+                  <option value="Sunflower Bouquet">Sunflower Bouquet</option>
+                  <option value="Stargazer Bouquet">Stargazer Bouquet</option>
+                  <option value="The VeeWise Special">
+                    The VeeWise Special
+                  </option>
                 </select>
 
                 <button type="submit">Update Product</button>

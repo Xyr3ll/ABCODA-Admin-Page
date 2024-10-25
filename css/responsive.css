@@ -1,0 +1,31 @@
+/* Responsive adjustments for mobile screens */
+@media only screen and (max-width: 768px) {
+    /* Stack recent orders and recent customers vertically */
+    .details {
+      display: block; /* Ensures each child takes full width */
+    }
+  
+    /* Move recent customers under recent orders */
+    .recentOrders {
+      margin-bottom: 20px; /* Add space between sections */
+    }
+  
+    /* Width adjustments for recent customers and orders */
+    .recentOrders, .recentCustomers {
+      width: 100%;
+    }
+  
+    /* Table scrollability on small screens */
+    .table-container, .recentCustomers table {
+      overflow-x: auto;
+      display: block;
+    }
+  
+    /* Ensure tables fit screen width */
+    .recentOrders table,
+    .recentCustomers table {
+      width: 100%;
+      min-width: 452px; /* Allows horizontal scroll on small screens */
+    }
+  }
+  

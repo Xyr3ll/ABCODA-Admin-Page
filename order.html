@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Accounts</title>
+    <link rel="stylesheet" href="css/responsivesidebar.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +27,7 @@
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-left">
-          <span class="material-icons-outlined">search</span>
+          <span class="header-title">ORDERS</span>
         </div>
         <div class="header-right">
           <span class="material-icons-outlined">notifications </span>
@@ -83,7 +84,7 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#">
+            <a href="logout">
               <span class="material-icons-outlined">logout</span>
               Log-out
             </a>
@@ -94,8 +95,13 @@
 
       <!--Main Content-->
       <main class="main-container">
-        <div class="order-header">
-          <p class="font-weight-bold">ORDERS</p>
+
+        <div class="choices-container">
+          <select id="combo-box" class="combo-box">
+            <option>Sort By:</option>
+            <option value="Date">Date</option>
+            <option value="Sales">Sales</option>
+          </select>
         </div>
 
         <div class="order-list">
@@ -110,6 +116,7 @@
                   <th>Total Price</th>
                   <th>Shipping Method</th>
                   <th>Proof image</th>
+                  <th>Order Date</th>
                   <th>Status</th>
                   <th>Approval</th>
                   <th>Action</th>
