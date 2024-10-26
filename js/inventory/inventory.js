@@ -51,7 +51,7 @@ document
             alt="${product.name}"
             style="width: 100px; height: auto; border-radius: 10px"
             class="product-image"
-            data-image-url="${product.imageUrl || "images/default.png"}"
+            data-image-url="${product.imageUrl || "../images/default.png"}"
           />
         <td>${product.id}</td>
         <td>${product.name}</td>
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       openPopup("addProductPopup");
       addProductForm.reset();
-      document.getElementById("productImagePreview").src = "images/default.png"; // Reset image preview
+      document.getElementById("productImagePreview").src = "../images/default.png"; 
     } catch (error) {
       console.error("Error adding product to Firestore: ", error);
       alert("Failed to add product. Please try again.");
@@ -279,7 +279,7 @@ window.editProduct = async function (productId) {
       if (product.imageUrl) {
         imagePreview.src = product.imageUrl;
       } else {
-        imagePreview.src = "images/default.png";
+        imagePreview.src = ".//images/default.png";
       }
 
       openEditModal("editProductModal");
@@ -303,11 +303,11 @@ function renderProducts(querySnapshot) {
       <tr data-id="${product.id}">
         <td>
           <img
-            src="${product.imageUrl || "images/default.png"}"
+            src="${product.imageUrl || "../images/default.png"}"
             alt="${product.name}"
             style="width: 100px; height: auto; border-radius: 10px"
             class="product-image"
-            data-image-url="${product.imageUrl || "images/default.png"}"
+            data-image-url="${product.imageUrl || "../images/default.png"}"
           />
         <td>${product.id}</td>
         <td>${product.name}</td>
@@ -317,10 +317,10 @@ function renderProducts(querySnapshot) {
         <td>
           <button class="edit-btn" onclick="editProduct('${
             product.id
-          }')"><img src="images/edit.png"></button>
+          }')"><img src="../images/edit.png"></button>
           <button class="delete-btn" onclick="deleteProduct('${
             product.id
-          }')"><img src="images/delete.png"></button>
+          }')"><img src="../images/delete.png"></button>
         </td>
       </tr>
     `;

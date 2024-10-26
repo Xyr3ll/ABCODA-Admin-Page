@@ -15,9 +15,10 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet"
     />
-    
+
     <link rel="stylesheet" href="../css/logout.css" />
     <link rel="stylesheet" href="../css/sidebarheader.css" />
+    <link rel="stylesheet" href="../css/chat_box.css" />
   </head>
   <body>
     <div class="grid-container">
@@ -27,7 +28,7 @@
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-left">
-          <span class="header-title">REPORTS</span>
+          <span class="header-title">CHATS</span>
         </div>
         <div class="header-right">
           <div
@@ -44,7 +45,9 @@
             </div>
             <!-- Add more notification items here -->
           </div>
-          <span class="material-icons-outlined">email</span>
+          <a href="chat_box.html">
+            <span class="material-icons-outlined">email</span>
+          </a>
           <span class="material-icons-outlined">account_circle</span>
         </div>
       </header>
@@ -105,6 +108,97 @@
         </ul>
       </aside>
       <!--End Sidebar-->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="chatbox-container">
+          <div class="chatside-container">
+            <aside>
+              <input type="text" class="search" placeholder="Search" />
+              <ul class="contacts-list">
+                <li class="contact-item">
+                  <img
+                    src="../images/defaultProfile.png"
+                    alt="Profile Picture"
+                    class="profile-pic"
+                  />
+                  <div class="contact-details">
+                    <p class="contact-name">Neil Xyrell Bergado</p>
+                    <div class="contact-info">
+                      <p class="contact-convo">Hi!</p>
+                      <p class="time-chat">12:53 PM</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="contacts-list">
+                <li class="contact-item">
+                  <img
+                    src="../images/defaultProfile.png"
+                    alt="Profile Picture"
+                    class="profile-pic"
+                  />
+                  <div class="contact-details">
+                    <p class="contact-name">Mac De Guzman</p>
+                    <div class="contact-info">
+                      <p class="contact-convo">Hi!</p>
+                      <p class="time-chat">12:53 PM</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="contacts-list">
+                <li class="contact-item">
+                  <img
+                    src="../images/defaultProfile.png"
+                    alt="Profile Picture"
+                    class="profile-pic"
+                  />
+                  <div class="contact-details">
+                    <p class="contact-name">Dex De Guzman</p>
+                    <div class="contact-info">
+                      <p class="contact-convo">Chongke na!</p>
+                      <p class="time-chat">08:03 PM</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </aside>
+          </div>
+
+          <div class="chatmain-container">
+            <div class="chat-area">
+              <div class="message received" onclick="toggleTime(this)">
+                <p>
+                  Hello! How are you doing today? This is a longer message to
+                  test the width.
+                </p>
+                <span class="convo-chat">12:30 PM</span>
+              </div>
+              <div class="message sent" onclick="toggleTime(this)">
+                <p>I'm good, thanks! How about you?</p>
+                <span class="convo-chat">12:30 PM</span>
+              </div>
+              <div class="message received" onclick="toggleTime(this)">
+                <p>Are we still on for the meeting tomorrow?</p>
+                <span class="convo-chat">12:30 PM</span>
+              </div>
+              <div class="message sent" onclick="toggleTime(this)">
+                <p>Yes, see you at 10 AM!</p>
+                <span class="convo-chat">12:30 PM</span>
+              </div>
+            </div>
+            <div class="message-input">
+              <input type="text" placeholder="Type a message..." />
+              <button>Send</button>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
+
+    <script src="../js/chat/chat_box.js"></script>
   </body>
 </html>
